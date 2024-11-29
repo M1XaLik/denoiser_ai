@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Chat with Bot</title>
+        <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-center">Чат</h1>
+
+            <!-- CHAT WINDOW DIV -->
+            <div id="chat-window">
+                <!-- MESSAGES DIV -->
+                <div id="messages" class="mb-3">
+                    {% for image in images %}
+                    <div
+                        class="mb-3 {% if image.uploader == 'user' %}text-right{% else %}text-left{% endif %}"
+                    >
+                        <!-- Original image from user -->
+                        {% if image.uploader == 'user' %}
+                        <p>UPLOADED ({{ image.timestamp.strftime('%Y-%m-%d %H:%M:%S') }})</p>
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + image.file_url) }}"
+                            class="img-fluid border-primary"
+                            alt="Original Image"
+                        />
+                        {% elif image.uploader == 'bot' %}
+                        <!-- Processed image from bot -->
+                        <p>PROCESSED ({{ image.timestamp.strftime('%Y-%m-%d %H:%M:%S') }})</p>
+                        <img
+                            src="{{ url_for('static', filename='processed/' + image.file_url) }}"
+                            class="img-fluid border-secondary mt-2"
+                            alt="Processed Image"
+                        />
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- FORM FOR UPLOADING FILES -->
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="p-3 border fixed-bottom bg-white image_loader"
+            >
+                <!-- CSRF TOKEN FOR PROTECTION -->
+                {{ form.hidden_tag() }}
+
+                <!-- FILE INPUT FIELD AND SUBMIT BUTTON IN ONE LINE -->
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="file-input" name="file" class="custom-file-input" />
+                        <label class="custom-file-label" for="file-input"
+                            >Завантажте зображення</label
+                        >
+                    </div>
+                </div>
+                <div class="input-group-append">
+                    <!-- <button type="submit" class="btn btn-primary">UPLOAD</button> -->
+                    <button type="submit" class="submit-button">UPLOAD</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- JAVASCRIPT FOR FILE INPUT LABEL -->
+        <script>
+            document.querySelector(".custom-file-input").addEventListener("change", function (e) {
+                var fileName = document.getElementById("file-input").files[0].name;
+                var nextSibling = e.target.nextElementSibling;
+                nextSibling.innerText = fileName;
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.amazonaws.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,114 @@
+/* Основний стиль для сайту */
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Контейнер завантаження */
+.image_loader {
+    position: fixed;
+    bottom: 2%;
+    left: 5%;
+    right: 5%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.input-group:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Стиль кнопки завантаження */
+.custom-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Ховаємо стандартний input */
+.custom-file-input {
+    display: none;
+}
+
+/* Кнопка "Відправити" */
+.submit-button {
+    background-color: #6a0dad;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    transform: scale(1.05);
+}
+
+/* Стиль для адаптивності */
+@media (max-width: 768px) {
+    .image_loader {
+        left: 2%;
+        right: 2%;
+        padding: 15px;
+    }
+
+    .custom-button,
+    .submit-button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+/* Додавання стилів для однакових розмірів зображень */
+.img-fluid {
+    max-width: 100%;
+    max-height: 400px; /* Ви можете змінити це значення на будь-який інший бажаний розмір */
+    width: auto;
+    height: auto;
+}
+
+#chat-window {
+    margin-bottom: 20%;
+}
+
+/* Стиль для заокруглених бортиків і кольорових рамок */
+.border-primary {
+    border: 3px solid #007bff;
+    border-radius: 15px;
+}
+
+.border-secondary {
+    border: 3px solid #6c757d;
+    border-radius: 15px;
+}
